@@ -7,6 +7,7 @@ banco = mysql.connector.connect(
     passwd='Manteigaderretida76',
     database='registro_de_alunos'
 )
+'mudanças foram feitas'
 
 
 def mostrando_segunda_tela():
