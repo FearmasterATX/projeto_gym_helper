@@ -137,3 +137,15 @@ tela_de_remocao.pushButton_4.clicked.connect(retornar_menu_remo)
 tela_de_remocao.pushButton_5.clicked.connect(remover_dados)
 tela_principal.show()
 app.exec()
+
+
+'''
+criação de tabelas mysql
+create table alunos (
+    id INT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(100),
+    informacoes VARCHAR(3000),
+    telefone INT,
+    PRIMARY KEY (id)
+);
+'''
