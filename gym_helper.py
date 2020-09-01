@@ -1,5 +1,6 @@
 from PyQt5 import uic, QtWidgets
 import mysql.connector
+from datetime import datetime
 
 banco = mysql.connector.connect(
     host='localhost',
@@ -7,7 +8,6 @@ banco = mysql.connector.connect(
     passwd='Manteigaderretida76',
     database='registro_de_alunos'
 )
-'mudanças foram feitas e mais ainda'
 
 
 def mostrando_segunda_tela():
@@ -140,6 +140,7 @@ app.exec()
 
 
 '''
+lembrete:
 criação de tabelas mysql
 create table alunos (
     id INT NOT NULL AUTO_INCREMENT,
@@ -148,4 +149,13 @@ create table alunos (
     telefone INT,
     PRIMARY KEY (id)
 );
+'''
+'''
+mexendo com datas:
+from datetime import datetime
+
+data_e_hora_atuais = datetime.now()
+data_e_hora_em_texto = data_e_hora_atuais.strftime(‘%d/%m/%Y’)
+
+print(data_e_hora_em_texto)
 '''
