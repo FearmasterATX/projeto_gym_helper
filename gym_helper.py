@@ -91,10 +91,13 @@ def adicionando_informacoes():
     linha_nome = str(tela_adicao.lineEdit.text())
     linha_peso = str(tela_adicao.lineEdit_2.text())
     linha_idade = str(tela_adicao.lineEdit_3.text())
+    linha_tel = str(tela_adicao.linetelefonead.text())
+    linha_datapd = str(tela_adicao.linedatapgad.text())
+    box_informacoes = str(tela_adicao.textboxad.text())
     # salvando o banco
     cursor = banco.cursor()
-    comando_sql = "INSERT INTO alunos (nome, peso, idade) VALUES (%s,%s,%s);"
-    dados = (linha_nome.title(), linha_peso, linha_idade)
+    comando_sql = "INSERT INTO alunos (nome, peso, idade, telefone, informacoes, datapg) VALUES (%s,%s,%s,%s,%s,%s);"
+    dados = (linha_nome.title(), linha_peso, linha_idade, linha_tel, box_informacoes, linha_datapd)
     cursor.execute(comando_sql, dados)
     banco.commit()
     retornar_menu_ad()
@@ -107,9 +110,9 @@ def mostrando_os_dados():
     cursor.execute(comando_sql)
     dados_lidos = cursor.fetchall()
     tela_de_amostragem.tableWidget.setRowCount(len(dados_lidos))
-    tela_de_amostragem.tableWidget.setColumnCount(4)
+    tela_de_amostragem.tableWidget.setColumnCount(7)
     for i in range(len(dados_lidos)):
-        for j in range(4):
+        for j in range(7):
             tela_de_amostragem.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(dados_lidos[i][j])))
 
 
