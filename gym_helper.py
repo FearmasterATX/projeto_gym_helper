@@ -104,6 +104,21 @@ def adicionando_informacoes():
 
 
 def mostrando_os_dados():
+    data_atual = datetime.now()
+    dia_atual = data_atual.strftime('%d')
+    mostrando_tela_de_amostragem()
+    cursor = banco.cursor()
+    comando_sql = f'select * from alunos WHERE Day(datapg) > {dia_atual};'
+    cursor.execute(comando_sql)
+    dados_lidos = cursor.fetchall()
+    tela_de_amostragem.tableWidget.setRowCount(len(dados_lidos))
+    tela_de_amostragem.tableWidget.setColumnCount(7)
+    for i in range(len(dados_lidos)):
+        for j in range(7):
+            tela_de_amostragem.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(dados_lidos[i][j])))
+
+
+'''def mostrando_os_dados():
     mostrando_tela_de_amostragem()
     cursor = banco.cursor()
     comando_sql = 'select * from alunos;'
@@ -113,8 +128,7 @@ def mostrando_os_dados():
     tela_de_amostragem.tableWidget.setColumnCount(7)
     for i in range(len(dados_lidos)):
         for j in range(7):
-            tela_de_amostragem.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(dados_lidos[i][j])))
-
+            tela_de_amostragem.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(dados_lidos[i][j])))'''
 
 app = QtWidgets.QApplication([])
 tela_principal = uic.loadUi("tela_de_entrada.ui")
@@ -140,7 +154,6 @@ tela_de_remocao.pushButton_4.clicked.connect(retornar_menu_remo)
 tela_de_remocao.pushButton_5.clicked.connect(remover_dados)
 tela_principal.show()
 app.exec()
-
 
 '''
 lembrete:
