@@ -35,6 +35,11 @@ def mostrar_tela_de_remocao():
     tela_de_remocao.show()
 
 
+def mostrar_tela_de_devedores():
+    tela_principal.close()
+    tela_de_devedores.show()
+
+
 def retornar_menu_ad():
     tela_adicao.close()
     tela_principal.show()
@@ -52,6 +57,11 @@ def retornar_menu_atualizar():
 
 def retornar_menu_remo():
     tela_de_remocao.close()
+    tela_principal.show()
+
+
+def retornar_devedore():
+    tela_de_devedores.close()
     tela_principal.show()
 
 
@@ -103,22 +113,22 @@ def adicionando_informacoes():
     retornar_menu_ad()
 
 
-def mostrando_os_dados():
+def mostrando_os_devedores():
     data_atual = datetime.now()
     dia_atual = data_atual.strftime('%d')
-    mostrando_tela_de_amostragem()
+    mostrar_tela_de_devedores()
     cursor = banco.cursor()
     comando_sql = f'select * from alunos WHERE Day(datapg) > {dia_atual};'
     cursor.execute(comando_sql)
     dados_lidos = cursor.fetchall()
-    tela_de_amostragem.tableWidget.setRowCount(len(dados_lidos))
-    tela_de_amostragem.tableWidget.setColumnCount(7)
+    tela_de_devedores.tableWidget.setRowCount(len(dados_lidos))
+    tela_de_devedores.tableWidget.setColumnCount(7)
     for i in range(len(dados_lidos)):
         for j in range(7):
-            tela_de_amostragem.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(dados_lidos[i][j])))
+            tela_de_devedores.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(dados_lidos[i][j])))
 
 
-'''def mostrando_os_dados():
+def mostrando_os_dados():
     mostrando_tela_de_amostragem()
     cursor = banco.cursor()
     comando_sql = 'select * from alunos;'
@@ -128,7 +138,8 @@ def mostrando_os_dados():
     tela_de_amostragem.tableWidget.setColumnCount(7)
     for i in range(len(dados_lidos)):
         for j in range(7):
-            tela_de_amostragem.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(dados_lidos[i][j])))'''
+            tela_de_amostragem.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(dados_lidos[i][j])))
+
 
 app = QtWidgets.QApplication([])
 tela_principal = uic.loadUi("tela_de_entrada.ui")
@@ -136,11 +147,13 @@ tela_adicao = uic.loadUi("tela_de_adicao.ui")
 tela_de_amostragem = uic.loadUi('tela_de_amostragem.ui')
 tela_de_atualizacao = uic.loadUi('tela_de_atualizacao.ui')
 tela_de_remocao = uic.loadUi('tela_de_remocao.ui')
+tela_de_devedores = uic.loadUi('tela_de_pagamento.ui')
 # tela principal
 tela_principal.pushButton.clicked.connect(mostrando_segunda_tela)
 tela_principal.pushButton_2.clicked.connect(mostrando_os_dados)
 tela_principal.pushButton_3.clicked.connect(mostrar_tela_de_remocao)
 tela_principal.pushButton_4.clicked.connect(mostrar_tela_de_atualizacao)
+tela_principal.pushButton_5.clicked.connect(mostrando_os_devedores)
 # tela de adição
 tela_adicao.pushButton_2.clicked.connect(adicionando_informacoes)
 tela_adicao.pushButton_3.clicked.connect(retornar_menu_ad)
@@ -152,6 +165,8 @@ tela_de_atualizacao.pushButton_2.clicked.connect(atualizar_dados)
 # tela de remocao
 tela_de_remocao.pushButton_4.clicked.connect(retornar_menu_remo)
 tela_de_remocao.pushButton_5.clicked.connect(remover_dados)
+# tela de devedores
+tela_de_devedores.pushButton_4.clicked.connect(retornar_devedore)
 tela_principal.show()
 app.exec()
 
